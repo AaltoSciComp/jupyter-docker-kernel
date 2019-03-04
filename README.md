@@ -73,6 +73,7 @@ doing that.
 ## Use with nbgrader
 
 1. Install the kernel as above, with some `--name=NAME`.  You may need
-to give any special options.
+to give any special options as above, in order to make your
+environment work.
 
 2. `nbgrader autograde --ExecutePreprocessor.kernel_name=NAME`.
