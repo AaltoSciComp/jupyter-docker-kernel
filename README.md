@@ -33,16 +33,36 @@ Install a new kernel:
 ./jupyter_docker_kernel.py setup --name=python3secure --image=aaltoscienceit/notebook-server:0.5.9 --user
 ```
 
-Extra options:
+Important options:
 
 * `--user`: install kernel as a user (recommended)
+
+* `--name=NAME`: Identifier of the python kernel, like `python3secure`
+  or some such.
 
 * `--mount=HOST:MOUNTPOINT`: mount a host directory inside the
   container.  By default, the working directory is mounted inside of
   the container (at the same path as on the host).  Jupyter chdirs to
-  the notebook directory before running the notebook.
+  the notebook directory before running the notebook.  If you add
+  `:ro` after, it will be mounted read-only, and if you specify
+  `:copy` it will be copied on the host before mounting.
 
-* `--copy-workdir`: copy the working directory to
+Other options:
+
+* `--workdir`: The container always uses the jupyter workdir from the
+  host as the source of workdir files.  This option only specifies the
+  *mountpoint* of that directory inside the image.
+
+* `--copy-workdir`: copy the working directory to a tmpdir before
+  mounting it.
+
+* `--python=/PATH/TO/PYTHON`: Path to Python to run in the container.
+  Defaults to `/opt/conda/bin/python3` which is suitable for the
+  upstream Jupyter docker stacks.
+
+* `--prefix` and `--replace`: same as normal Jupyter kernel
+  installation options: prefix to install to and replace existing
+  kernel.
 
 This kernel can now be used on the *host* system, with all code
 running in the docker container.  Note that the kernel itself doesn't
